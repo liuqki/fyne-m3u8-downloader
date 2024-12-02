@@ -1,4 +1,4 @@
-package tool
+package core
 
 import (
 	"os"
@@ -8,10 +8,12 @@ import (
 // 单个下载任务
 type Downloader struct {
 	VideoUrl    string
+	VideoTitle  string // 视频名-一般是集数
 	SavePath    string
 	DownPercent float32 // 下载进度（单位1）
 	JumpHeadSec uint32  // 跳过片头的长度
 	JumpTailSec uint32  // 跳过片尾的长度
+	isBatch     bool    // 是否是批量下载
 }
 
 // 视频片段

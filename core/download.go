@@ -1,4 +1,4 @@
-package tool
+package core
 
 import (
 	"bufio"
@@ -94,7 +94,9 @@ func (dd Downloader) DownVideo(bar *widget.ProgressBar, logCh chan string) error
 	wg.Wait()
 	bar.SetValue(1) // 设置进度条为100%
 	logCh <- "下载已完成，开始合并..."
-	newFile := fmt.Sprintf("%v%v.mp4", dd.SavePath, time.Now().Unix()) // 最终保存文件的名字
+
+	// todo 处理集数
+	newFile := fmt.Sprintf("%v%v_%v.mp4", dd.SavePath, time.Now().Unix(), dd.VideoTitle) // 最终保存文件的名字
 	combine(newFile, fileList, logCh)
 	logCh <- fmt.Sprintf("合并已完成，视频保存路径：%v，共耗时：%v\n", newFile, time.Since(start))
 	return nil
